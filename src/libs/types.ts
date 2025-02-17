@@ -18,7 +18,7 @@ export type TSignUpSchema = z.infer<typeof signUpSchema>
 
 
 export const loginSchema = z.object({
-  email: z.string().email(),
+  username: z.string(),
   password: z.string().min(8, 'Password must be at least 8 characters long')
 })
 

@@ -1,13 +1,19 @@
 "use client";
+
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+
+  const {user, logout} = useAuth()
 
   return (
-    <nav className="bg-white">
+    <nav className="bg-white border-b shadow-2xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="text-xl font-bold text-gray-900">
@@ -40,6 +46,48 @@ export default function Navbar() {
             </div>
 
             <Link href="/about" className="text-gray-700 hover:text-blue-500">About</Link>
+          </div>
+
+          <div className="hidden md:flex space-x-6">
+            {user ? (
+              <div className="relative">
+                <button
+                  onClick={() => setIsAccountOpen(!isAccountOpen)}
+                  className="text-gray-700 hover:text-blue-500 focus:outline-none"
+                >
+                  <Image
+                    className="rounded-full w-8 h-8 mr-2"
+                    src={user?.image}
+                    alt={user?.username}
+                    width={40}
+                    height={40}
+                  />
+                </button>
+                {isAccountOpen && (
+                  <div className="absolute left-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg">
+                    <div className="flex items-center">
+                      <span>{user?.username}</span>
+                    </div>
+                    <button
+                      onClick={logout}
+                      className="text-gray-700 hover:text-blue-500 bg-transparent border-none cursor-pointer"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <>
+                <Link href="/login" className="text-gray-700 hover:text-blue-500">Login</Link>
+              </>
+            )}
+            <button
+              onClick={logout}
+              className="text-gray-700 hover:text-blue-500 bg-transparent border-none cursor-pointer"
+            >
+              Logout
+            </button>
           </div>
 
           <div className="md:hidden">
@@ -80,6 +128,40 @@ export default function Navbar() {
           </div>
 
           <Link href="/about" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">About</Link>
+
+          {user ? (
+            <div className="relative">
+              <button
+                onClick={() => setIsAccountOpen(!isAccountOpen)}
+                className="block px-4 py-2 text-gray-700 hover:bg-gray-100e"
+              >
+                <Image
+                  className="rounded-full w-8 h-8 mr-2"
+                  src={user?.image}
+                  alt={user?.username}
+                  width={40}
+                  height={40}
+                />
+              </button>
+              {isAccountOpen && (
+                <div className="bg-white border-t border-gray-200">
+                  <div className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                    <span>{user?.username}</span>
+                  </div>
+                  <div
+                    onClick={logout}
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  >
+                    Logout
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
+              <Link href="/login" className="text-gray-700 hover:text-blue-500">Login</Link>
+            </>
+          )}
         </div>
       )}
     </nav>
