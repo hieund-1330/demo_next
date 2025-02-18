@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface User {
   id: string | number
@@ -22,17 +22,26 @@ const AuthContext = createContext<TAuthContext | undefined>(undefined)
 
 export const AuthProvider = ({children}: {children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(() => {
-    const savedUser = localStorage.getItem('user') || null;
-    return savedUser ? JSON.parse(savedUser) : null;
+    if(typeof window !== 'undefined' ) {
+      const savedUser = localStorage.getItem('user') || null;
+      return savedUser ? JSON.parse(savedUser) : null;
+    }
+    return null;
   });
 
   const [accessToken, setAccessToken] = useState<string | null>(() => {
-    return localStorage.getItem('accessToken');
+    if(typeof window !== 'undefined' ) {
+      return localStorage.getItem('accessToken');
+    }
+    return null
   });
 
 
   const [refreshToken, setRefreshToken] = useState<string | null>(() => {
-    return localStorage.getItem('refreshToken');
+    if(typeof window !== 'undefined' ) {
+      return localStorage.getItem('refreshToken');
+    }
+    return null
   });
 
   const login = (user: User, accessToken: string, refreshToken: string) => {
@@ -47,6 +56,7 @@ export const AuthProvider = ({children}: {children: React.ReactNode }) => {
   const logout = () => {
     localStorage.removeItem('accessToken')
     localStorage.removeItem('refreshToken')
+    localStorage.removeItem('user')
     setUser(null)
     setAccessToken(null)
     setRefreshToken(null)

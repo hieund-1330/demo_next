@@ -1,7 +1,6 @@
 'use client'
 import Post, { PostProps } from "@/components/Post";
 import { fetchPosts } from "@/libs/api";
-import { log } from "console";
 import { useEffect, useState } from "react";
 
 export default function Home() {
