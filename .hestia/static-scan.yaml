@@ -1,0 +1,26 @@
+global:
+  branches:
+  - main
+  - staging
+  defaultScanners:
+  - semgrep
+  - joern
+  - brakeman
+
+rules:
+  - name: nodejs-services
+    paths:
+    - src/account
+    - src/web
+    - src/issue-webhook
+    - src/pm-api
+    scanners:
+    - semgrep
+  - name: go-services
+    paths:
+    - src/worker
+    - src/scheduler
+    - src/rubato-sync
+    scanners:
+    - semgrep
+    - joern
