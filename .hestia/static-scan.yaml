@@ -3,7 +3,7 @@ global:
   - main
   - staging
   - master
-  - test-wb-gitlab
+  - test-wh-gitlab
   defaultScanners:
   - semgrep
   
