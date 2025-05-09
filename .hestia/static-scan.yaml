@@ -2,25 +2,20 @@ global:
   branches:
   - main
   - staging
+  - master
+  - test-wb-gitlab
   defaultScanners:
   - semgrep
-  - joern
-  - brakeman
-
+  
 rules:
   - name: nodejs-services
     paths:
-    - src/account
-    - src/web
-    - src/issue-webhook
-    - src/pm-api
+    - src/app/api
     scanners:
     - semgrep
   - name: go-services
     paths:
-    - src/worker
-    - src/scheduler
-    - src/rubato-sync
+    - src/app/posts
+    - src/app/login
     scanners:
-    - semgrep
     - joern
