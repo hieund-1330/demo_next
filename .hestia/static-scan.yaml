@@ -6,7 +6,7 @@ global:
   - test-wh-github
   defaultScanners:
   - semgrep
-  
+
 rules:
   - name: nodejs-services
     paths:
@@ -15,6 +15,7 @@ rules:
     - semgrep
   - name: go-services
     paths:
+    - src/app/api
     - src/app/posts
     - src/app/login
     scanners:
