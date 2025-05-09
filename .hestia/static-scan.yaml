@@ -6,7 +6,7 @@ global:
   - test-wh-github
   defaultScanners:
   - semgrep
-  
+
 rules:
   - name: nodejs-services
     paths:

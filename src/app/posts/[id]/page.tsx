@@ -1,16 +1,19 @@
-import Comments from "@/components/Comments"
-import { PostProps } from "@/components/Post"
-import { fetchCommentsForPost, fetchPost, fetchPosts } from "@/libs/api"
-import { logTime } from "@/libs/log"
+import Comments from "@/components/Comments";
+import { PostProps } from "@/components/Post";
+import { fetchCommentsForPost, fetchPost, fetchPosts } from "@/libs/api";
 
-export const revalidate = 60
+export const revalidate = 60;
 
-export const dynamicParams = false
+export const dynamicParams = false;
 
-export default async function PostDetail({params}: { params: Promise<{ id: string }> }) {
-  const id = (await params).id
-  const post = await fetchPost(id)
-  const comments = await fetchCommentsForPost(id)
+export default async function PostDetail({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const id = (await params).id;
+  const post = await fetchPost(id);
+  const comments = await fetchCommentsForPost(id);
   return (
     <div className="container mx-auto p-4 text-black">
       <article className="bg-white p-6 rounded-lg shadow-md mb-8">
@@ -22,12 +25,12 @@ export default async function PostDetail({params}: { params: Promise<{ id: strin
         <Comments comments={comments} />
       </section>
     </div>
-  )
+  );
 }
 
 export async function generateStaticParams() {
-  const posts: PostProps[] = await fetchPosts()
+  const posts: PostProps[] = await fetchPosts();
   return posts.map((post) => ({
     id: String(post.id),
-  }))
+  }));
 }
