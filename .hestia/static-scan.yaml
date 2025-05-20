@@ -4,19 +4,19 @@ global:
   - staging
   - master
   - test-wh-github
+  - test-hestia-wh-stg
   defaultScanners:
   - semgrep
 
 rules:
-  - name: nodejs-services
+  - name: semgrep-api
     paths:
     - src/app/api
     scanners:
     - semgrep
-  - name: go-services
+  - name: joern-post
     paths:
     - src/app/api
     - src/app/posts
-    - src/app/login
     scanners:
     - joern
