@@ -4,7 +4,7 @@
 void vulnerable() {
     char buffer[10];
     printf("Enter some text: ");
-    gets(buffer);           // <-- unsafe, có thể overflow
+    gets(buffer);           // <-- unsafe, có thể overflow 123123
     printf("You said: %s\n", buffer);
 }
 
