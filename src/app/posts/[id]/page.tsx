@@ -5,7 +5,7 @@ import { fetchCommentsForPost, fetchPost, fetchPosts } from "@/libs/api";
 export const revalidate = 60;
 
 export const dynamicParams = false;
-// tét webhook
+// tét webhook 123
 export default async function PostDetail({
   params,
 }: {

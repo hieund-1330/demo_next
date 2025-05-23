@@ -1,22 +1,25 @@
-import { signUpSchema } from "@/libs/types"
-import { NextResponse } from "next/server"
+import { signUpSchema } from "@/libs/types";
+import { NextResponse } from "next/server";
 
-export async function POST(request: Request){
-  const body: unknown = await request.json()
+export async function POST(request: Request) {
+  const body: unknown = await request.json();
 
-  //Zod dùng để kiểm tra dữ liệu (body) theo signUpSchema
-  const result =  signUpSchema.safeParse(body)
+  //Zod dùng để kiểm
+  // tra dữ liệu (body)
+  // theo
+  // signUpSchema 123 123 123 121233123 12349182u89123
+  const result = signUpSchema.safeParse(body);
 
-  let zodErrors = {}
+  let zodErrors = {};
   if (!result.success) {
     result.error.issues.forEach((issue) => {
-      zodErrors = {...zodErrors, [issue.path[0]]: issue.message }
-    })
+      zodErrors = { ...zodErrors, [issue.path[0]]: issue.message };
+    });
   }
 
   return NextResponse.json(
     Object.keys(zodErrors).length > 0
       ? { errors: zodErrors }
       : { success: true }
-  )
+  );
 }

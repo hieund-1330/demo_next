@@ -7,7 +7,7 @@ import (
 )
 
 func getUser(db *sql.DB, userID string) {
-    // build query bằng fmt.Sprintf → dễ SQL-injection
+    // build query bằng fmt.Sprintf → dễ SQL-injection123123
     query := fmt.Sprintf("SELECT * FROM users WHERE id = '%s'", userID)
     rows, err := db.Query(query)
     if err != nil {
