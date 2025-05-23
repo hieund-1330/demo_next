@@ -1,11 +1,10 @@
-'use client'
+"use client";
 
-import { useAuth } from "@/context/AuthContext"
-import { loginSchema, TLoginSchema } from "@/libs/types"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useRouter } from "next/navigation"
-import React from "react"
-import { useForm } from "react-hook-form"
+import { useAuth } from "@/context/AuthContext";
+import { loginSchema, TLoginSchema } from "@/libs/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 
 const LoginPage = () => {
   const {
@@ -14,48 +13,48 @@ const LoginPage = () => {
     formState: { errors, isSubmitting },
     setError,
   } = useForm<TLoginSchema>({
-    resolver: zodResolver(loginSchema)
-  })
+    resolver: zodResolver(loginSchema),
+  });
 
-  const { login } = useAuth()
-  const router = useRouter()
+  const { login } = useAuth();
+  const router = useRouter();
 
   const onSubmit = async (data: TLoginSchema) => {
-    const username = data.username
-    const password = data.password
+    const username = data.username;
+    const password = data.password;
     try {
-      const response = await fetch('https://dummyjson.com/user/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("https://dummyjson.com/user/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           username,
           password,
-          expiresInMins: 60
+          expiresInMins: 60,
         }),
-      })
-      if(!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.message || 'Login failed')
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Login failed");
       }
 
-      const data = await response.json()
+      const data = await response.json();
       const user = {
         id: data.id,
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
         username: data.username,
-        image: data.image
-      }
-      const accessToken = data.accessToken
-      const refreshToken = data.refreshToken
-      login(user, accessToken, refreshToken)
-      router.push('/')
+        image: data.image,
+      };
+      const accessToken = data.accessToken;
+      const refreshToken = data.refreshToken;
+      login(user, accessToken, refreshToken);
+      router.push("/");
     } catch (error) {
-      console.error('Login failed:', error)
-      alert('login failed')
+      console.error("Login failed:", error);
+      alert("login failed");
     }
-  }
+  };
 
   // const onLogin = async (data: TLoginSchema) => {
   //   const response = await fetch('/api/login', {
@@ -97,7 +96,9 @@ const LoginPage = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-semibold text-center mb-6 text-black">Login</h2>
+        <h2 className="text-2xl font-semibold text-center mb-6 text-black">
+          Login
+        </h2>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
@@ -111,11 +112,11 @@ const LoginPage = () => {
               type="text"
               id="username"
               className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
-              {...register('username')}
+              {...register("username")}
             />
-            {
-              errors.username && <p className="text-red-500">{`${errors.username.message}`}</p>
-            }
+            {errors.username && (
+              <p className="text-red-500">{`${errors.username.message}`}</p>
+            )}
           </div>
 
           <div className="mb-4">
@@ -129,11 +130,11 @@ const LoginPage = () => {
               type="password"
               id="password"
               className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
-              {...register('password')}
+              {...register("password")}
             />
-            {
-              errors.password && <p className='text-red-500'>{`${errors.password.message}`}</p>
-            }
+            {errors.password && (
+              <p className="text-red-500">{`${errors.password.message}`}</p>
+            )}
           </div>
 
           <button
@@ -146,7 +147,7 @@ const LoginPage = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;
