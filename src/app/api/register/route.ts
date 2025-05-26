@@ -4,7 +4,7 @@ import { NextResponse } from "next/server"
 export async function POST(request: Request){
   const body: unknown = await request.json()
 
-  //Zod dùng để kiểm tra dữ liệu (body) theo signUpSchema 1234
+  //Zod dùng để kiểm tra dữ liệu (body) theo signUpSchema 1234 123
   const result =  signUpSchema.safeParse(body)
 
   let zodErrors = {}
