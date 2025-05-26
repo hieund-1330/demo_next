@@ -10,7 +10,7 @@ const RegisterPage = () => {
     // giúp123 React Hook Form theo dõi 123giá trị
     // của các trường và xử lý va12323123li123123123dation khi123 người dùng nhậádasdp dữ liệu
     handleSubmit, // được gọi khi f1231orm đư123ợc gửádas123dád
-    // Nó nhận và12312o một h12à123112323m xử lý (thường là123 h12323àm subm1231iádadsd
+    // Nó nhận và12312o một h12à123112123323m xử lý (thường là123 h12323àm subm1231iádadsd
     // và sẽ g123ọi3123 hàm 123đó chỉ3123 khi dữ li123ệu form123 hợp lệ (tức là qua được validation).123
     formState: { errors, isSubmitting }, //231
     setError, //thủ công thiết lập lỗi ch123123o maasdas1234dột trường nhất định trong for123123m
