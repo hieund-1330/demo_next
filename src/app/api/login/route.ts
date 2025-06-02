@@ -12,7 +12,7 @@ const GET = async (request: Request) => {
       zodErrors = {...zodErrors, [issue.path[0]]: issue.message}
     })
   }
-
+// 123
   return NextResponse.json(
     Object.keys(zodErrors).length > 0
       ? { errors: zodErrors }
