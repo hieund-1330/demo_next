@@ -6,15 +6,15 @@ import { useForm } from "react-hook-form";
 const RegisterPage = () => {
   // react hook form setup
   const {
-    register, //đăng ký các trường của 132form,
-    // giúp123 React Hook Form theo dõi 123giá trị
-    // của các trường và xử lý va12323123li123123123dation khi123 người dùng nhậádasdp dữ liệu
-    handleSubmit, // được gọi khi f1231orm đư123ợc gửádas123dád
-    // Nó nhận và12312o một h12à123112123323m xử lý (thường là123 h12323àm subm1231iádadsd
-    // và sẽ g123ọi3123 hàm 123đó chỉ3123 khi dữ li123ệu form123 hợp lệ (tức là qua được validation).123
-    formState: { errors, isSubmitting }, //231
-    setError, //thủ công thiết lập lỗi ch123123o maasdas1234dột trường nhất định trong for123123m
-    // có thể sử dụng nó khi muốn thêm lỗi ngoài validation tự động12311232312123
+    register, //đăng ký các trường của form,
+    // giúp React Hook Form theo dõi giá trị
+    // của các trường và xử lý validation khi người dùng nhập dữ liệu
+    handleSubmit, // được gọi khi form được gửi đi.
+    // Nó nhận vào một hàm xử lý (thường là hàm submit)
+    // và sẽ gọi hàm đó chỉ khi dữ liệu form hợp lệ (tức là qua được validation).
+    formState: { errors, isSubmitting },
+    setError //thủ công thiết lập lỗi cho một trường nhất định trong form
+    // có thể sử dụng nó khi muốn thêm lỗi ngoài validation tự động
   } = useForm<TSignUpSchema>({
     resolver: zodResolver(signUpSchema),
   });
@@ -28,9 +28,9 @@ const RegisterPage = () => {
         password: data.password,
         confirmPassword: data.confirmPassword,
       }),
-    });
-// 123 123 123
-    const responseData = await response.json();
+    })
+
+    const responseData = await response.json()
 
     if (!response.ok) {
       alert("Register failed");
